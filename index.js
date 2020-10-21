@@ -8,13 +8,16 @@ function Book(title, pageNumber, author, status = false) {
 }
 
 function addBookToLibrary() {
-  myLibrary.push(new Book('Perfect title', 304, 'Jelil Abudu'))
-  myLibrary.push(new Book('Awful title', 200, 'Sercan Uygur'))
-  myLibrary.push(new Book('Ok title', 150, 'John Doe'))
+  let a = new Book('Perfect title', 304, 'Jelil Abudu')
+  let b = new Book('Awful title', 200, 'Sercan Uygur', true)
+  let c = new Book('Ok title', 150, 'John Doe')
+  myLibrary.push(a)
+  myLibrary.push(b)
+  myLibrary.push(c)
 }
 
 function LoopTheArray() {
-  let tableBody = document.querySelector('tbody');
+  let tableBody = document.querySelector('.body');
   
   for (let element of myLibrary) {
     let trow = document.createElement('tr');
@@ -34,8 +37,10 @@ function LoopTheArray() {
     tableBody.appendChild(trow);
   
 }
-window.addEventListener('load', addBookToLibrary);
-document.addEventListener('load', LoopTheArray);
+}
+
+addBookToLibrary()
+LoopTheArray()
 
 
 
