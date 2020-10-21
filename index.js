@@ -8,35 +8,34 @@ function Book(title, pageNumber, author, status = false) {
 }
 
 function addBookToLibrary() {
-  myLibrary.push(Book.new('Perfect title', 304, 'Jelil Abudu'))
-  myLibrary.push(Book.new('Awful title', 200, 'Sercan Uygur'))
-  myLibrary.push(Book.new('Ok title', 150, 'John Doe'))
+  myLibrary.push(new Book('Perfect title', 304, 'Jelil Abudu'))
+  myLibrary.push(new Book('Awful title', 200, 'Sercan Uygur'))
+  myLibrary.push(new Book('Ok title', 150, 'John Doe'))
 }
 
 function LoopTheArray() {
-  let tableBody = document.querySelector('tbody')
+  let tableBody = document.querySelector('tbody');
   
-  myLibrary.forEach((element) => {
-    let trow = document.createElement('tr')
-    let tdTitle = document.createElement('td').textContent
-    tdTitle.textContent = element.title
-    let tdAuthor = document.createElement('td').textContent
-    tdAuthor.textContent =element.author
-    let tdAge = document.createElement('td').textContent
-    tdAge.textContent = element.pageNumber
-    let tdStatus = document.createElement('td').textContent
-    tdStatus.textContent =element.status
+  for (let element of myLibrary) {
+    let trow = document.createElement('tr');
+    let tdTitle = document.createElement('td');
+    tdTitle.textContent = element.title;
+    let tdAuthor = document.createElement('td');
+    tdAuthor.textContent =element.author;
+    let tdAge = document.createElement('td');
+    tdAge.textContent = element.pageNumber;
+    let tdStatus = document.createElement('td');
+    tdStatus.textContent = element.status;
 
-    trow.appendChild(tdTitle)
-    trow.appendChild(tdAuthor)
-    trow.appendChild(tdAge)
-    trow.appendChild(tdStatus)
-    tableBody.appendChild(trow)
-  })
+    trow.appendChild(tdTitle);
+    trow.appendChild(tdAuthor);
+    trow.appendChild(tdAge);
+    trow.appendChild(tdStatus);
+    tableBody.appendChild(trow);
   
 }
-
-document.addEventListener('load', LoopTheArray)
+window.addEventListener('load', addBookToLibrary);
+document.addEventListener('load', LoopTheArray);
 
 
 
