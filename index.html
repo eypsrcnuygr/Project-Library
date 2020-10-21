@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library</title>
   
-  <link type="text/css" rel="stylesheet" href="./index.scss">
+  <link type="text/scss" rel="stylesheet" href="./index.scss">
 </head>
 <body>
   <table>
@@ -20,6 +20,30 @@
     <tbody class="body">
     </tbody>
   </table>
+
+  <form action="#">
+    <div class="form-group">
+      <label for="bookTitle">Book title</label>
+      <input type="text" class="form-control" id="bookTitle" required>
+    </div>
+    <div class="form-group">
+      <label for="bookAuthor">Book author</label>
+      <input type="text" class="form-control" id="bookAuthor" required>
+    </div>
+    <div class="form-group">
+      <label for="pageNum">Page Numbers</label>
+      <input type="number" class="form-control" id="pageNum" required>
+    </div>
+    <div class="form-group">
+      <label for="readStatus">Read?</label>
+      <input type="checkbox" class="form-control" id="readStatus" required>
+    </div>
+    <div class="form-group">
+      <button id="cancelBtn">Cancel</button>
+      <button id="addBtn">Add</button>
+    </div>
+  </form>
+
   <script type="text/javascript" src="./index.js"></script>
 </body>
 </html>
