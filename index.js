@@ -1,5 +1,15 @@
 let myLibrary = [];
 
+document.addEventListener('load', (e) => {
+  if (localStorage.getItem('myLibrary', JSON.stringify(myLibrary))) {
+    myLibrary = localStorage.getItem('myLibrary', JSON.stringify(myLibrary));
+  }
+  else {
+    myLibrary = []
+  }
+  
+});
+
 function Book(title, author, pageNumber, status = false) {
   this.title = title;
   this.pageNumber = pageNumber;
@@ -15,6 +25,7 @@ function addBookToLibrary() {
 
     let newBook = new Book(bookTitle, bookAuthor, pageNum, bookStatus);
     myLibrary.push(newBook);
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
 
 function LoopTheArray() {
@@ -52,9 +63,9 @@ function LoopTheArray() {
     tableBody.appendChild(trow);
 
     toogleButton.addEventListener('click', (e) => {
-      toggleStatus(element)
-      tdStatus.textContent = element.status
-    })
+      toggleStatus(element);
+      tdStatus.textContent = element.status;
+    });
 
 
     deleteBtn.addEventListener('click', (e) => {
@@ -65,12 +76,12 @@ function LoopTheArray() {
 }
 
 function toggleStatus(book) {
-  book.status = !book.status
+  book.status = !book.status;
 }
 
 function deleteBook(bookId) {
   myLibrary.splice(bookId, 1);
-  // localStorage.setItem('my_library', JSON.stringify(myLibrary));
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
   clearView();
   LoopTheArray();
 }
