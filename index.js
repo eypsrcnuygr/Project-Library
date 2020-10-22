@@ -1,13 +1,14 @@
 let myLibrary = [];
 
-document.addEventListener('load', (e) => {
-  if (localStorage.getItem('myLibrary', JSON.stringify(myLibrary))) {
-    myLibrary = localStorage.getItem('myLibrary', JSON.stringify(myLibrary));
+window.addEventListener('load', () => {
+  if (localStorage.getItem('bookLibrary', JSON.stringify(myLibrary))) {
+    myLibrary = JSON.parse(localStorage.getItem('bookLibrary'));
+    console.log(myLibrary);
   }
   else {
-    myLibrary = []
+    myLibrary = [];
   }
-  
+  LoopTheArray();
 });
 
 function Book(title, author, pageNumber, status = false) {
@@ -25,7 +26,7 @@ function addBookToLibrary() {
 
     let newBook = new Book(bookTitle, bookAuthor, pageNum, bookStatus);
     myLibrary.push(newBook);
-    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+    localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
 }
 
 function LoopTheArray() {
@@ -81,7 +82,7 @@ function toggleStatus(book) {
 
 function deleteBook(bookId) {
   myLibrary.splice(bookId, 1);
-  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+  localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
   clearView();
   LoopTheArray();
 }
