@@ -30,11 +30,17 @@ function LoopTheArray() {
     tdAge.textContent = element.pageNumber;
     let tdStatus = document.createElement('td');
     tdStatus.textContent = element.status;
+    let deleteBtn = document.createElement('button')
+    let tdButton = document.createElement('td')
+    tdButton.appendChild(deleteBtn)
+    deleteBtn.setAttribute('class', 'btnDelete')
+    deleteBtn.setAttribute('data', myLibrary.indexOf(element))
 
     trow.appendChild(tdTitle);
     trow.appendChild(tdAuthor);
     trow.appendChild(tdAge);
     trow.appendChild(tdStatus);
+    trow.appendChild(tdButton)
     tableBody.appendChild(trow);
 
   }
@@ -69,3 +75,13 @@ addBookBtn.onclick = function() {
 cancelBtn.onclick = function() {
   modal.style.display = "none";
 };
+
+var deleteBtn = document.querySelectorAll('.btnDelete')
+
+deleteBtn.onclick = function() {
+  for (let i = 0; i < deleteBtn.length; i++) {
+    myLibrary.splice(0, 1)
+    clearView()
+    LoopTheArray()
+  }
+}
