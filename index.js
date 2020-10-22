@@ -41,12 +41,31 @@ function LoopTheArray() {
 }
 
 document.querySelector('.form').addEventListener('submit', function(e) {
-  clearView()
-  addBookToLibrary()
-  LoopTheArray()
-  e.preventDefault()
-})
+  clearView();
+  addBookToLibrary();
+  LoopTheArray();
+  e.preventDefault();
+},);
 
 function clearView() {
-  document.querySelector('tbody').innerHTML = ''
+  document.querySelector('tbody').innerHTML = '';
 }
+
+
+let modal = document.getElementById("form-modal");
+
+// Get the button that opens the modal
+let addBookBtn = document.getElementById("addBookBtn");
+
+// Get the <span> element that closes the modal
+let cancelBtn = document.getElementsByClassName("cancel-btn")[0];
+
+// When the user clicks on the button, open the modal
+addBookBtn.onclick = function() {
+  modal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+cancelBtn.onclick = function() {
+  modal.style.display = "none";
+};
