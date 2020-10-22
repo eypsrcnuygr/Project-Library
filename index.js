@@ -8,9 +8,6 @@ function Book(title, author, pageNumber, status = false) {
 }
 
 function addBookToLibrary() {
-  let addBtn = document.getElementById('addBtn');
-
-  addBtn.addEventListener('click', function (e) {
     let bookTitle = document.getElementById('bookTitle').value;
     let bookAuthor = document.getElementById('bookAuthor').value;
     let pageNum = document.getElementById('pageNum').value;
@@ -18,10 +15,6 @@ function addBookToLibrary() {
 
     let newBook = new Book(bookTitle, bookAuthor, pageNum, bookStatus);
     myLibrary.push(newBook);
-    e.preventDefault();
-  });
-
-
 }
 
 function LoopTheArray() {
@@ -47,6 +40,14 @@ function LoopTheArray() {
   }
 }
 
+document.querySelector('.form').addEventListener('submit', function(e) {
+  clearView()
+  addBookToLibrary()
+  LoopTheArray()
+  e.preventDefault()
+})
 
-addBookToLibrary();
-LoopTheArray();
+function clearView() {
+  document.querySelector('tbody').innerHTML = ''
+}
+
