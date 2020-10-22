@@ -44,6 +44,10 @@ function LoopTheArray() {
     tableBody.appendChild(trow);
 
   }
+  document.getElementsByClassName('btnDelete').addEventListener('click', function() {
+    console.log('sercan')
+  })
+ 
 }
 
 document.querySelector('.form').addEventListener('submit', function(e) {
@@ -76,12 +80,3 @@ cancelBtn.onclick = function() {
   modal.style.display = "none";
 };
 
-var deleteBtn = document.querySelectorAll('.btnDelete')
-
-deleteBtn.onclick = function() {
-  for (let i = 0; i < deleteBtn.length; i++) {
-    myLibrary.splice(0, 1)
-    clearView()
-    LoopTheArray()
-  }
-}
