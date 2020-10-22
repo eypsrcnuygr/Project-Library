@@ -31,17 +31,30 @@ function LoopTheArray() {
     let tdStatus = document.createElement('td');
     tdStatus.textContent = element.status;
     let deleteBtn = document.createElement('button')
+    deleteBtn.textContent = 'Delete'
     let tdButton = document.createElement('td');
     tdButton.appendChild(deleteBtn);
     deleteBtn.setAttribute('class', 'btnDelete');
     deleteBtn.setAttribute('data', myLibrary.indexOf(element));
+
+    var toogleButton = document.createElement('button');
+    let tdToggle = document.createElement('td');
+    tdToggle.appendChild(toogleButton);
+    toogleButton.setAttribute('class', 'toggle-button')
+    toogleButton.textContent = 'Toggle'
 
     trow.appendChild(tdTitle);
     trow.appendChild(tdAuthor);
     trow.appendChild(tdAge);
     trow.appendChild(tdStatus);
     trow.appendChild(tdButton);
+    trow.appendChild(tdToggle);
     tableBody.appendChild(trow);
+
+    toogleButton.addEventListener('click', (e) => {
+      toggleStatus(element)
+      tdStatus.textContent = element.status
+    })
 
 
     deleteBtn.addEventListener('click', (e) => {
@@ -49,6 +62,10 @@ function LoopTheArray() {
     });
   }
  
+}
+
+function toggleStatus(book) {
+  book.status = !book.status
 }
 
 function deleteBook(bookId) {
