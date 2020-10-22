@@ -50,4 +50,3 @@ document.querySelector('.form').addEventListener('submit', function(e) {
 function clearView() {
   document.querySelector('tbody').innerHTML = ''
 }
-
