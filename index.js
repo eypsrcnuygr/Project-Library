@@ -31,23 +31,31 @@ function LoopTheArray() {
     let tdStatus = document.createElement('td');
     tdStatus.textContent = element.status;
     let deleteBtn = document.createElement('button')
-    let tdButton = document.createElement('td')
-    tdButton.appendChild(deleteBtn)
-    deleteBtn.setAttribute('class', 'btnDelete')
-    deleteBtn.setAttribute('data', myLibrary.indexOf(element))
+    let tdButton = document.createElement('td');
+    tdButton.appendChild(deleteBtn);
+    deleteBtn.setAttribute('class', 'btnDelete');
+    deleteBtn.setAttribute('data', myLibrary.indexOf(element));
 
     trow.appendChild(tdTitle);
     trow.appendChild(tdAuthor);
     trow.appendChild(tdAge);
     trow.appendChild(tdStatus);
-    trow.appendChild(tdButton)
+    trow.appendChild(tdButton);
     tableBody.appendChild(trow);
 
+
+    deleteBtn.addEventListener('click', (e) => {
+      deleteBook(myLibrary.indexOf(element));
+    });
   }
-  document.getElementsByClassName('btnDelete').addEventListener('click', function() {
-    console.log('sercan')
-  })
  
+}
+
+function deleteBook(bookId) {
+  myLibrary.splice(bookId, 1);
+  // localStorage.setItem('my_library', JSON.stringify(myLibrary));
+  clearView();
+  LoopTheArray();
 }
 
 document.querySelector('.form').addEventListener('submit', function(e) {
