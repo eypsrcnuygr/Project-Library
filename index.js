@@ -1,11 +1,70 @@
 let myLibrary = [];
 
+function toggleStatus(book) {
+  book.status = !book.status;
+}
+
+function clearView() {
+  document.querySelector('tbody').innerHTML = '';
+}
+
+function deleteBook(bookId) {
+  myLibrary.splice(bookId, 1);
+  localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
+  clearView();
+  LoopTheArray();
+}
+
+function LoopTheArray() {
+  const tableBody = document.querySelector('.body');
+
+  for (const element of myLibrary) {
+    const trow = document.createElement('tr');
+    const tdTitle = document.createElement('td');
+    tdTitle.textContent = element.title;
+    const tdAuthor = document.createElement('td');
+    tdAuthor.textContent = element.author;
+    const tdAge = document.createElement('td');
+    tdAge.textContent = element.pageNumber;
+    const tdStatus = document.createElement('td');
+    tdStatus.textContent = element.status;
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    const tdButton = document.createElement('td');
+    tdButton.appendChild(deleteBtn);
+    deleteBtn.setAttribute('class', 'btnDelete');
+    deleteBtn.setAttribute('data', myLibrary.indexOf(element));
+
+    const toogleButton = document.createElement('button');
+    const tdToggle = document.createElement('td');
+    tdToggle.appendChild(toogleButton);
+    toogleButton.setAttribute('class', 'toggle-button');
+    toogleButton.textContent = 'Toggle';
+
+    trow.appendChild(tdTitle);
+    trow.appendChild(tdAuthor);
+    trow.appendChild(tdAge);
+    trow.appendChild(tdStatus);
+    trow.appendChild(tdButton);
+    trow.appendChild(tdToggle);
+    tableBody.appendChild(trow);
+
+    toogleButton.addEventListener('click', () => {
+      toggleStatus(element);
+      tdStatus.textContent = element.status;
+    });
+
+
+    deleteBtn.addEventListener('click', () => {
+      deleteBook(myLibrary.indexOf(element));
+    });
+  }
+}
+
 window.addEventListener('load', () => {
   if (localStorage.getItem('bookLibrary', JSON.stringify(myLibrary))) {
     myLibrary = JSON.parse(localStorage.getItem('bookLibrary'));
-    console.log(myLibrary);
-  }
-  else {
+  } else {
     myLibrary = [];
   }
   LoopTheArray();
@@ -19,101 +78,39 @@ function Book(title, author, pageNumber, status = false) {
 }
 
 function addBookToLibrary() {
-    let bookTitle = document.getElementById('bookTitle').value;
-    let bookAuthor = document.getElementById('bookAuthor').value;
-    let pageNum = document.getElementById('pageNum').value;
-    let bookStatus = document.getElementById('readStatus').checked;
+  const bookTitle = document.getElementById('bookTitle').value;
+  const bookAuthor = document.getElementById('bookAuthor').value;
+  const pageNum = document.getElementById('pageNum').value;
+  const bookStatus = document.getElementById('readStatus').checked;
 
-    let newBook = new Book(bookTitle, bookAuthor, pageNum, bookStatus);
-    myLibrary.push(newBook);
-    localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
-}
-
-function LoopTheArray() {
-  let tableBody = document.querySelector('.body');
-
-  for (let element of myLibrary) {
-    let trow = document.createElement('tr');
-    let tdTitle = document.createElement('td');
-    tdTitle.textContent = element.title;
-    let tdAuthor = document.createElement('td');
-    tdAuthor.textContent = element.author;
-    let tdAge = document.createElement('td');
-    tdAge.textContent = element.pageNumber;
-    let tdStatus = document.createElement('td');
-    tdStatus.textContent = element.status;
-    let deleteBtn = document.createElement('button')
-    deleteBtn.textContent = 'Delete'
-    let tdButton = document.createElement('td');
-    tdButton.appendChild(deleteBtn);
-    deleteBtn.setAttribute('class', 'btnDelete');
-    deleteBtn.setAttribute('data', myLibrary.indexOf(element));
-
-    var toogleButton = document.createElement('button');
-    let tdToggle = document.createElement('td');
-    tdToggle.appendChild(toogleButton);
-    toogleButton.setAttribute('class', 'toggle-button')
-    toogleButton.textContent = 'Toggle'
-
-    trow.appendChild(tdTitle);
-    trow.appendChild(tdAuthor);
-    trow.appendChild(tdAge);
-    trow.appendChild(tdStatus);
-    trow.appendChild(tdButton);
-    trow.appendChild(tdToggle);
-    tableBody.appendChild(trow);
-
-    toogleButton.addEventListener('click', (e) => {
-      toggleStatus(element);
-      tdStatus.textContent = element.status;
-    });
-
-
-    deleteBtn.addEventListener('click', (e) => {
-      deleteBook(myLibrary.indexOf(element));
-    });
-  }
- 
-}
-
-function toggleStatus(book) {
-  book.status = !book.status;
-}
-
-function deleteBook(bookId) {
-  myLibrary.splice(bookId, 1);
+  const newBook = new Book(bookTitle, bookAuthor, pageNum, bookStatus);
+  myLibrary.push(newBook);
   localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
-  clearView();
-  LoopTheArray();
 }
 
-document.querySelector('.form').addEventListener('submit', function(e) {
+
+document.querySelector('.form').addEventListener('submit', (e) => {
   clearView();
   addBookToLibrary();
   LoopTheArray();
   e.preventDefault();
-},);
+});
 
-function clearView() {
-  document.querySelector('tbody').innerHTML = '';
+
+const modal = document.getElementById('form-modal');
+
+const addBookBtn = document.getElementById('addBookBtn');
+
+const cancelBtn = document.getElementsByClassName('cancel-btn')[0];
+
+function cancelFunc() {
+  modal.style.display = 'none';
 }
 
+function blockFunc() {
+  modal.style.display = 'block';
+}
 
-let modal = document.getElementById("form-modal");
+addBookBtn.addEventListener('click', blockFunc());
 
-// Get the button that opens the modal
-let addBookBtn = document.getElementById("addBookBtn");
-
-// Get the <span> element that closes the modal
-let cancelBtn = document.getElementsByClassName("cancel-btn")[0];
-
-// When the user clicks on the button, open the modal
-addBookBtn.onclick = function() {
-  modal.style.display = "block";
-};
-
-// When the user clicks on <span> (x), close the modal
-cancelBtn.onclick = function() {
-  modal.style.display = "none";
-};
-
+cancelBtn.addEventListener('click', cancelFunc());
