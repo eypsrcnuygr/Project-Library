@@ -1,20 +1,20 @@
 let myLibrary = [];
 
-function toggleStatus(book) {
+const toggleStatus = (book) => {
   book.status = !book.status;
   localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
-}
+};
 
-let clearView = () => {
+const clearView = () => {
   document.querySelector('tbody').innerHTML = '';
-}
+};
 
-let deleteBook = (bookId) => {
+const deleteBook = (bookId) => {
   myLibrary.splice(bookId, 1);
   localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
-}
+};
 
-let LoopTheArray = () => {
+const LoopTheArray = () => {
   myLibrary.map(element => {
     const tableBody = document.querySelector('.body');
     const trow = document.createElement('tr');
@@ -62,9 +62,9 @@ let LoopTheArray = () => {
       tableBody.appendChild(trow)
     );
   });
-}
+};
 
-let loadLocalStorage = () => {
+const loadLocalStorage = () => {
   if (localStorage.getItem('bookLibrary', JSON.stringify(myLibrary))) {
     myLibrary = JSON.parse(localStorage.getItem('bookLibrary'));
   } else {
@@ -84,7 +84,7 @@ function Book(title, author, pageNumber, status = false) {
   this.status = status;
 }
 
-let addBookToLibrary = () => {
+const addBookToLibrary = () => {
   const bookTitle = document.getElementById('bookTitle').value;
   const bookAuthor = document.getElementById('bookAuthor').value;
   const pageNum = document.getElementById('pageNum').value;
@@ -93,7 +93,7 @@ let addBookToLibrary = () => {
   const newBook = new Book(bookTitle, bookAuthor, pageNum, bookStatus);
   myLibrary.push(newBook);
   localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
-}
+};
 
 
 document.querySelector('.form').addEventListener('submit', (e) => {
@@ -110,13 +110,13 @@ const addBookBtn = document.getElementById('addBookBtn');
 
 const cancelBtn = document.getElementsByClassName('cancel-btn')[0];
 
-let cancelFunc = () => {
+const cancelFunc = () => {
   modal.style.display = 'none';
-}
+};
 
-let blockFunc = () => {
+const blockFunc = () => {
   modal.style.display = 'block';
-}
+};
 
 addBookBtn.addEventListener('click', blockFunc);
 
