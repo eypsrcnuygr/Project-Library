@@ -2,7 +2,7 @@ let myLibrary = [];
 
 function toggleStatus(book) {
   book.status = !book.status;
-  // localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
+  localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
 }
 
 function clearView() {
