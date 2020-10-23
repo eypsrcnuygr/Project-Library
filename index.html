@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library</title>
+
+  <link type="text/css" rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  
+  <table>
+    <caption>
+      <h1>Book Library</h1>
+      <button id="addBookBtn">Add New book</button>
+    </caption>
+    <thead>
+      <tr>
+        <td>Title</td>
+        <td>Author</td>
+        <td>Page Number</td>
+        <td>Read</td>
+        <td>Delete</td>
+        <td>Change the Status</td>
+      </tr>
+    </thead>
+    <tbody class="body">
+    </tbody>
+  </table>
+  <div>
+    
+  <div id="form-modal">
+  <div class="modal-content">
+    <button id="cancelBtn" class="cancel-btn">Cancel</button>
+    <form action="#" class="form">
+      <div class="form-group">
+        <label for="bookTitle">Book title</label>
+        <input type="text" class="form-control" id="bookTitle" required>
+      </div>
+      <div class="form-group">
+        <label for="bookAuthor">Book author</label>
+        <input type="text" class="form-control" id="bookAuthor" required>
+      </div>
+      <div class="form-group">
+        <label for="pageNum">Page Numbers</label>
+        <input type="number" class="form-control" id="pageNum" required>
+      </div>
+      <div class="form-group">
+        <label for="readStatus">Read?</label>
+        <input type="checkbox" class="form-control" id="readStatus">
+      </div>
+      <div class="form-group">
+        
+        <button id="addBtn">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script type="text/javascript" src="./index.js"></script>
+</body>
+
+</html>
