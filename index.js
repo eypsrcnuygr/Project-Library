@@ -5,16 +5,16 @@ function toggleStatus(book) {
   localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
 }
 
-function clearView() {
+let clearView = () => {
   document.querySelector('tbody').innerHTML = '';
 }
 
-function deleteBook(bookId) {
+let deleteBook = (bookId) => {
   myLibrary.splice(bookId, 1);
   localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
 }
 
-function LoopTheArray() {
+let LoopTheArray = () => {
   myLibrary.map(element => {
     const tableBody = document.querySelector('.body');
     const trow = document.createElement('tr');
@@ -64,12 +64,16 @@ function LoopTheArray() {
   });
 }
 
-window.addEventListener('load', () => {
+let loadLocalStorage = () => {
   if (localStorage.getItem('bookLibrary', JSON.stringify(myLibrary))) {
     myLibrary = JSON.parse(localStorage.getItem('bookLibrary'));
   } else {
     myLibrary = [];
   }
+};
+
+window.addEventListener('load', () => {
+  loadLocalStorage();
   LoopTheArray();
 });
 
@@ -80,7 +84,7 @@ function Book(title, author, pageNumber, status = false) {
   this.status = status;
 }
 
-function addBookToLibrary() {
+let addBookToLibrary = () => {
   const bookTitle = document.getElementById('bookTitle').value;
   const bookAuthor = document.getElementById('bookAuthor').value;
   const pageNum = document.getElementById('pageNum').value;
@@ -106,11 +110,11 @@ const addBookBtn = document.getElementById('addBookBtn');
 
 const cancelBtn = document.getElementsByClassName('cancel-btn')[0];
 
-function cancelFunc() {
+let cancelFunc = () => {
   modal.style.display = 'none';
 }
 
-function blockFunc() {
+let blockFunc = () => {
   modal.style.display = 'block';
 }
 
