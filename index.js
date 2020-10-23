@@ -11,32 +11,30 @@ function clearView() {
 function deleteBook(bookId) {
   myLibrary.splice(bookId, 1);
   localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
-  clearView();
-  LoopTheArray();
 }
 
 function LoopTheArray() {
-  const tableBody = document.querySelector('.body');
-
-  for (const element of myLibrary) {
+  myLibrary.map(element => {
+    const tableBody = document.querySelector('.body');
     const trow = document.createElement('tr');
     const tdTitle = document.createElement('td');
-    tdTitle.textContent = element.title;
     const tdAuthor = document.createElement('td');
-    tdAuthor.textContent = element.author;
     const tdAge = document.createElement('td');
-    tdAge.textContent = element.pageNumber;
     const tdStatus = document.createElement('td');
-    tdStatus.textContent = element.status;
     const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
     const tdButton = document.createElement('td');
+    const toogleButton = document.createElement('button');
+    const tdToggle = document.createElement('td');
+    tdTitle.textContent = element.title;
+    tdAuthor.textContent = element.author;
+    tdAge.textContent = element.pageNumber;
+    tdStatus.textContent = element.status;
+    deleteBtn.textContent = 'Delete';
     tdButton.appendChild(deleteBtn);
     deleteBtn.setAttribute('class', 'btnDelete');
     deleteBtn.setAttribute('data', myLibrary.indexOf(element));
 
-    const toogleButton = document.createElement('button');
-    const tdToggle = document.createElement('td');
+
     tdToggle.appendChild(toogleButton);
     toogleButton.setAttribute('class', 'toggle-button');
     toogleButton.textContent = 'Toggle';
@@ -47,7 +45,7 @@ function LoopTheArray() {
     trow.appendChild(tdStatus);
     trow.appendChild(tdButton);
     trow.appendChild(tdToggle);
-    tableBody.appendChild(trow);
+
 
     toogleButton.addEventListener('click', () => {
       toggleStatus(element);
@@ -56,9 +54,13 @@ function LoopTheArray() {
 
 
     deleteBtn.addEventListener('click', () => {
+      deleteBtn.parentElement.parentElement.innerText = '';
       deleteBook(myLibrary.indexOf(element));
     });
-  }
+    return (
+      tableBody.appendChild(trow)
+    );
+  });
 }
 
 window.addEventListener('load', () => {
@@ -111,6 +113,6 @@ function blockFunc() {
   modal.style.display = 'block';
 }
 
-addBookBtn.addEventListener('click', blockFunc());
+addBookBtn.addEventListener('click', blockFunc);
 
-cancelBtn.addEventListener('click', cancelFunc());
+cancelBtn.addEventListener('click', cancelFunc);
