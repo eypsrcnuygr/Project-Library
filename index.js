@@ -77,13 +77,13 @@ window.addEventListener('load', () => {
   LoopTheArray();
 });
 
-function Book(title, author, pageNumber, status = false) {
-  return {
-    title,
-    author,
-    pageNumber,
-    status,
-  };
+class Book {
+  constructor(title, author, pageNumber, status = false) {
+    this.title = title;
+    this.author = author;
+    this.pageNumber = pageNumber;
+    this.status = status;
+  }
 }
 
 const addBookToLibrary = () => {
@@ -92,7 +92,7 @@ const addBookToLibrary = () => {
   const pageNum = document.getElementById('pageNum').value;
   const bookStatus = document.getElementById('readStatus').checked;
 
-  const newBook = Book(bookTitle, bookAuthor, pageNum, bookStatus);
+  const newBook = new Book(bookTitle, bookAuthor, pageNum, bookStatus);
   myLibrary.push(newBook);
   localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
 };
