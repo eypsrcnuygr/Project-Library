@@ -78,10 +78,12 @@ window.addEventListener('load', () => {
 });
 
 function Book(title, author, pageNumber, status = false) {
-  this.title = title;
-  this.pageNumber = pageNumber;
-  this.author = author;
-  this.status = status;
+  return {
+    title,
+    author,
+    pageNumber,
+    status,
+  };
 }
 
 const addBookToLibrary = () => {
@@ -90,7 +92,7 @@ const addBookToLibrary = () => {
   const pageNum = document.getElementById('pageNum').value;
   const bookStatus = document.getElementById('readStatus').checked;
 
-  const newBook = new Book(bookTitle, bookAuthor, pageNum, bookStatus);
+  const newBook = Book(bookTitle, bookAuthor, pageNum, bookStatus);
   myLibrary.push(newBook);
   localStorage.setItem('bookLibrary', JSON.stringify(myLibrary));
 };
